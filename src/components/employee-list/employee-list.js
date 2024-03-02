@@ -1,11 +1,15 @@
 import EmployeeListItem from '../employee-list-item/employee-list-item';
 import './employee-list.css';
 
-const EmployeeList = ({data}) => {
+const EmployeeList = ({data, onDelete}) => {
 
     const elements = data.map(item => {
+        const {id, ...itemProps} = item;          // (name={item.name} salary={item.salary} increase={item.increase}) - это и есть ...itemProps
         return (
-            <EmployeeListItem name={item.name} salary={item.salary} increase={item.increase} key={item.id}/>       // можно использовать спрэд оператор {...item}, что даст тоже самое
+            <EmployeeListItem 
+                key={id} 
+                {...itemProps}                              // можно использовать спрэд оператор {...item}, что даст тоже самое
+                onDelete={() => onDelete(id)}/>       
         )
     })
     
